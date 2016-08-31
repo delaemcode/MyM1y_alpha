@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/colorPrimary"
+              android:paddingLeft="2dp"
+              android:paddingTop="2dp"
+              android:paddingBottom="2dp"
+              android:layout_width="match_parent"
+              android:layout_height="48dp">
+    <FrameLayout
+        android:id="@+id/cash_accounts"
+        android:background="@color/colorAccent"
+        android:layout_marginRight="2dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:drawableLeft="@drawable/ic_account_balance_wallet_white_24dp"
+            android:drawablePadding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="cash accounts"
+            android:textAllCaps="true"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/transactions"
+        android:layout_marginRight="2dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:drawableLeft="@drawable/ic_import_export_white_24dp"
+            android:drawablePadding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="transactions"
+            android:textAllCaps="true"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+</LinearLayout>
