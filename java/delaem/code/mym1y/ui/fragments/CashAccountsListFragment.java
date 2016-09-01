@@ -1,5 +1,6 @@
 package delaem.code.mym1y.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.db.SQliteApi;
+import delaem.code.mym1y.ui.activities.EditCashAccountActivity;
 import delaem.code.mym1y.ui.adapters.CashAccountsAdapter;
 
 public class CashAccountsListFragment
@@ -20,18 +22,19 @@ public class CashAccountsListFragment
 
     //___________________FIELDS
     private CashAccountsAdapter adapter;
-//    private final View.OnClickListener clickListener = new View.OnClickListener()
-//    {
-//        @Override
-//        public void onClick(View view)
-//        {
-//            switch(view.getId())
-//            {
-//                case R.id.add:
-//                    break;
-//            }
-//        }
-//    };
+    private final View.OnClickListener clickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            switch(view.getId())
+            {
+                case R.id.add:
+                    addCashAccount();
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onResume()
@@ -50,14 +53,25 @@ public class CashAccountsListFragment
     private void initViews(View v)
     {
         list = (RecyclerView) v.findViewById(R.id.list);
+        v.findViewById(R.id.add).setOnClickListener(clickListener);
     }
     private void init()
     {
         adapter = new CashAccountsAdapter(getActivity(), new CashAccountsAdapter.ICashAccountsAdapterListener()
         {
+            @Override
+            public void getCashAccount(int id)
+            {
+
+            }
         });
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(adapter);
+    }
+
+    private void addCashAccount()
+    {
+        getActivity().startActivity(new Intent(getActivity(), EditCashAccountActivity.class));
     }
 
     public void loadCashAccounts()

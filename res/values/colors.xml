@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">@color/graydark</color>
     <color name="colorAccent">@color/orange</color>
 
+    <color name="primary_trans">#8830302E</color>
     <color name="white_trans">#88ffffff</color>
     <color name="white">#ffffff</color>
     <color name="graylight">#505050</color>

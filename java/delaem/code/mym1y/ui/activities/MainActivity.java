@@ -77,11 +77,6 @@ public class MainActivity
                 .commit();
     }
 
-    private void addCashAccount()
-    {
-        startActivity(new Intent(this, EditCashAccountActivity.class));
-    }
-
     private void testData()
     {
 //        insertCashAccounts();

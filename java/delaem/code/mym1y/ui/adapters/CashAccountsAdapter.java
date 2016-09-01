@@ -2,6 +2,7 @@ package delaem.code.mym1y.ui.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.BaseColumns;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,15 @@ public class CashAccountsAdapter
     public void onBindViewHolder(CashAccountsHolder holder, int position)
     {
         data.moveToPosition(position);
+        final int id = data.getInt(data.getColumnIndex(BaseColumns._ID));
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                listener.getCashAccount(id);
+            }
+        });
         holder.name.setText(data.getString(data.getColumnIndex(Tables.CashAccounts.Columns.name)));
     }
 
@@ -73,6 +83,6 @@ public class CashAccountsAdapter
 
     public interface ICashAccountsAdapterListener
     {
-
+        void getCashAccount(int id);
     }
 }

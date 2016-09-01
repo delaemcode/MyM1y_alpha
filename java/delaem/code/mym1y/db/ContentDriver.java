@@ -17,6 +17,7 @@ public class ContentDriver
         }
         content.put(Tables.CashAccounts.Columns.name, item.name);
         content.put(Tables.CashAccounts.Columns.description, item.description);
+        content.put(Tables.CashAccounts.Columns.balance, item.balance + "");
         return content;
     }
     static public ContentValues getContentValues(Transaction item)

@@ -11,7 +11,7 @@ import delaem.code.mym1y.core.Transaction;
 public class SQliteApi
 {
     static private final String DB_NAME = "mym1y_alpha";
-    static private final int DB_VERSION = 1608311844;
+    static private final int DB_VERSION = 1609011622;
     static private SQliteApi instanse;
 
     static public SQliteApi getInstanse()

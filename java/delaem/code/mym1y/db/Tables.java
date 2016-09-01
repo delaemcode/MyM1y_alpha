@@ -11,12 +11,14 @@ public class Tables
         {
             public static final String name = TABLE_NAME + "_" + "name";
             public static final String description = TABLE_NAME + "_" + "description";
+            public static final String balance = TABLE_NAME + "_" + "balance";
         }
         static public String createTable()
         {
             return "create table if not exists " + TABLE_NAME + " (" +
                     BaseColumns._ID + " integer primary key autoincrement, " +
                     Columns.description + " text" + "," +
+                    Columns.balance + " text" + "," +
                     Columns.name + " text" +
                     ");";
         }
