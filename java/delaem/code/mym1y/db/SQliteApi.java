@@ -11,7 +11,7 @@ import delaem.code.mym1y.core.Transaction;
 public class SQliteApi
 {
     static private final String DB_NAME = "mym1y_alpha";
-    static private final int DB_VERSION = 1609011622;
+    static private final int DB_VERSION = 1609021620;
     static private SQliteApi instanse;
 
     static public SQliteApi getInstanse()
@@ -23,7 +23,35 @@ public class SQliteApi
         return instanse;
     }
 
-    private volatile SQLiteDatabase sdb;
+    private SQLiteDatabase sdb;
+    private Tables.CashAccounts cashAccounts = new Tables.CashAccounts()
+    {
+        @Override
+        public Cursor getAll()
+        {
+            return sdb.query(Tables.CashAccounts.TABLE_NAME, null, null, null, null, null, null);
+        }
+
+        @Override
+        public long insertOne(CashAccount item)
+        {
+            return sdb.insertWithOnConflict(Tables.CashAccounts.TABLE_NAME, null, ContentDriver.getContentValues(item), SQLiteDatabase.CONFLICT_REPLACE);
+        }
+    };
+    private Tables.Transactions transactions = new Tables.Transactions()
+    {
+        @Override
+        public Cursor getAll()
+        {
+            return sdb.query(Tables.Transactions.TABLE_NAME, null, null, null, null, null, null);
+        }
+
+        @Override
+        public long insertOne(Transaction item)
+        {
+            return sdb.insertWithOnConflict(Tables.Transactions.TABLE_NAME, null, ContentDriver.getContentValues(item), SQLiteDatabase.CONFLICT_REPLACE);
+        }
+    };
 
     private SQliteApi()
     {
@@ -59,24 +87,13 @@ public class SQliteApi
         sdb.endTransaction();
     }
 
-    //____________________________GET_ALL
-    public Cursor getCashAccounts()
+    public Tables.CashAccounts getCashAccounts()
     {
-        return sdb.query(Tables.CashAccounts.TABLE_NAME, null, null, null, null, null, null);
+        return cashAccounts;
     }
-    public Cursor getTransactions()
+    public Tables.Transactions getTransactions()
     {
-        return sdb.query(Tables.Transactions.TABLE_NAME, null, null, null, null, null, null);
-    }
-
-    //____________________________INSERT
-    public long insertCashAccount(CashAccount item)
-    {
-        return sdb.insertWithOnConflict(Tables.CashAccounts.TABLE_NAME, null, ContentDriver.getContentValues(item), SQLiteDatabase.CONFLICT_REPLACE);
-    }
-    public long insertTransaction(Transaction item)
-    {
-        return sdb.insertWithOnConflict(Tables.Transactions.TABLE_NAME, null, ContentDriver.getContentValues(item), SQLiteDatabase.CONFLICT_REPLACE);
+        return transactions;
     }
 
     private void clearTables(SQLiteDatabase db)
@@ -86,7 +103,7 @@ public class SQliteApi
     }
     public void createTables(SQLiteDatabase db)
     {
-        db.execSQL(Tables.CashAccounts.createTable());
-        db.execSQL(Tables.Transactions.createTable());
+        db.execSQL(Tables.CashAccounts.CREATE_TABLE);
+        db.execSQL(Tables.Transactions.CREATE_TABLE);
     }
 }

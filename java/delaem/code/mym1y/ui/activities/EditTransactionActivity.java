@@ -6,25 +6,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import delaem.code.mym1y.R;
-import delaem.code.mym1y.ui.fragments.EditCashAccountFragment;
+import delaem.code.mym1y.ui.fragments.EditTransactionFragment;
 
-public class EditCashAccountActivity
+public class EditTransactionActivity
         extends AppCompatActivity
 {
-    static public final int REQUEST_CODE = 1906;
+    static public final int REQUEST_CODE = 1552;
     static public final int RESULT_OK = 0;
     static public final int RESULT_CANCEL = 1;
 
-    static public void startForNewCashAccount(Activity activity)
+    static public void startForNewTransaction(Activity activity)
     {
-        Intent i = new Intent(activity, EditCashAccountActivity.class);
+        Intent i = new Intent(activity, EditTransactionActivity.class);
         activity.startActivityForResult(i, REQUEST_CODE);
     }
 
-    private final EditCashAccountFragment editCashAccountFragment = EditCashAccountFragment.newInstance(new EditCashAccountFragment.IEditCashAccountFragmentListener()
+    private final EditTransactionFragment editTransactionFragment = EditTransactionFragment.newInstance(new EditTransactionFragment.IEditTransactionFragmentListener()
     {
         @Override
-        public void saveCashAccount()
+        public void saveTransaction()
         {
             setResult(RESULT_OK);
             finish();
@@ -41,7 +41,7 @@ public class EditCashAccountActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_cash_account_activity);
+        setContentView(R.layout.edit_transaction_activity);
         initViews();
         init();
     }
@@ -54,7 +54,7 @@ public class EditCashAccountActivity
         setResult(RESULT_CANCEL);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_frame, editCashAccountFragment)
+                .add(R.id.main_frame, editTransactionFragment)
                 .commit();
     }
 }

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.db.SQliteApi;
+import delaem.code.mym1y.listeners.ui.adapters.ITransactionsAdapterListener;
+import delaem.code.mym1y.ui.activities.EditTransactionActivity;
 import delaem.code.mym1y.ui.adapters.TransactionsAdapter;
 
 public class TransactionsFragment
@@ -20,6 +22,19 @@ public class TransactionsFragment
 
     //___________________FIELDS
     private TransactionsAdapter adapter;
+    private final View.OnClickListener clickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            switch(view.getId())
+            {
+                case R.id.add:
+                    addTransaction();
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onResume()
@@ -38,18 +53,25 @@ public class TransactionsFragment
     private void initViews(View v)
     {
         list = (RecyclerView) v.findViewById(R.id.list);
+        v.findViewById(R.id.add).setOnClickListener(clickListener);
     }
     private void init()
     {
-        adapter = new TransactionsAdapter(getActivity(), new TransactionsAdapter.ITransactionsAdapterListener()
+        adapter = new TransactionsAdapter(getActivity(), new ITransactionsAdapterListener()
         {
         });
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(adapter);
     }
 
+    private void addTransaction()
+    {
+        EditTransactionActivity.startForNewTransaction(getActivity());
+    }
+
     public void loadTransactions()
     {
-        adapter.swapData(SQliteApi.getInstanse().getTransactions());
+        adapter.getModel().swapData(SQliteApi.getInstanse().getTransactions().getAll());
+        adapter.notifyDataSetChanged();
     }
 }

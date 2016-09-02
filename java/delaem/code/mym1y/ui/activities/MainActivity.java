@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.core.CashAccount;
@@ -32,6 +31,13 @@ public class MainActivity
             if(result == EditCashAccountActivity.RESULT_OK)
             {
                 cashAccountsListFragment.loadCashAccounts();
+            }
+        }
+        else if(request == EditTransactionActivity.REQUEST_CODE)
+        {
+            if(result == EditTransactionActivity.RESULT_OK)
+            {
+                transactionsFragment.loadTransactions();
             }
         }
         super.onActivityResult(request, result, intent);
@@ -86,21 +92,21 @@ public class MainActivity
     {
         CashAccount item = new CashAccount();
         item.name = "nalychko";
-        SQliteApi.getInstanse().insertCashAccount(item);
+        SQliteApi.getInstanse().getCashAccounts().insertOne(item);
         item.name = "sber";
-        SQliteApi.getInstanse().insertCashAccount(item);
+        SQliteApi.getInstanse().getCashAccounts().insertOne(item);
     }
     private void insertTransactions()
     {
         Transaction item = new Transaction();
         item.cash_account_from_id = 0;
         item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().insertTransaction(item);
+        SQliteApi.getInstanse().getTransactions().insertOne(item);
         item.cash_account_from_id = 0;
         item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().insertTransaction(item);
+        SQliteApi.getInstanse().getTransactions().insertOne(item);
         item.cash_account_from_id = 1;
         item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().insertTransaction(item);
+        SQliteApi.getInstanse().getTransactions().insertOne(item);
     }
 }

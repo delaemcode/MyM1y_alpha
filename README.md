@@ -8,9 +8,9 @@ new version MyM1y app for testing
 	applicationId "delaem.code.mym1y"
 	minSdkVersion 15
 	targetSdkVersion 24
-	versionBase 1609011622
-	versionCode 1609011631
-	versionName "0.03dbdesign"
+	versionBase 1609021620
+	versionCode 1609021640
+	versionName "0.04newdatamodelsystem"
 ## dependencies
 	com.android.support:appcompat-v7:24.1.1
 	com.android.support:recyclerview-v7:24.1.1

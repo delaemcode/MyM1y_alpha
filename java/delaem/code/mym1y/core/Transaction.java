@@ -5,6 +5,7 @@ public class Transaction
     public int id;
     public int cash_account_from_id;
     public int summ;
+    public String comment;
     public long time;
 
     public Transaction()

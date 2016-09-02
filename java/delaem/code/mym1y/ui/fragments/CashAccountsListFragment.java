@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.db.SQliteApi;
+import delaem.code.mym1y.listeners.ui.adapters.ICashAccountsAdapterListener;
+import delaem.code.mym1y.models.CashAccountsModel;
 import delaem.code.mym1y.ui.activities.EditCashAccountActivity;
 import delaem.code.mym1y.ui.adapters.CashAccountsAdapter;
 
@@ -57,7 +59,7 @@ public class CashAccountsListFragment
     }
     private void init()
     {
-        adapter = new CashAccountsAdapter(getActivity(), new CashAccountsAdapter.ICashAccountsAdapterListener()
+        adapter = new CashAccountsAdapter(getActivity(), new ICashAccountsAdapterListener()
         {
             @Override
             public void getCashAccount(int id)
@@ -71,11 +73,12 @@ public class CashAccountsListFragment
 
     private void addCashAccount()
     {
-        getActivity().startActivity(new Intent(getActivity(), EditCashAccountActivity.class));
+        EditCashAccountActivity.startForNewCashAccount(getActivity());
     }
 
     public void loadCashAccounts()
     {
-        adapter.swapData(SQliteApi.getInstanse().getCashAccounts());
+        adapter.getModel().swapData(SQliteApi.getInstanse().getCashAccounts().getAll());
+        adapter.notifyDataSetChanged();
     }
 }

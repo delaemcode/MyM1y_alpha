@@ -16,6 +16,9 @@
         <activity
             android:name=".ui.activities.EditCashAccountActivity">
         </activity>
+        <activity
+            android:name=".ui.activities.EditTransactionActivity">
+        </activity>
     </application>
 
 </manifest>

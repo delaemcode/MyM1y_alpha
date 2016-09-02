@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import delaem.code.mym1y.R;
-import delaem.code.mym1y.core.CashAccount;
+import delaem.code.mym1y.core.Transaction;
 import delaem.code.mym1y.db.SQliteApi;
 
-public class EditCashAccountFragment
+public class EditTransactionFragment
         extends Fragment
 {
-    static public EditCashAccountFragment newInstance(IEditCashAccountFragmentListener l)
+    static public EditTransactionFragment newInstance(IEditTransactionFragmentListener l)
     {
-        EditCashAccountFragment fragment = new EditCashAccountFragment();
+        EditTransactionFragment fragment = new EditTransactionFragment();
         Bundle bundle = fragment.getArguments();
         fragment.setArguments(bundle);
         fragment.listener = l;
@@ -24,12 +24,11 @@ public class EditCashAccountFragment
     }
 
     //___________________VIEWS
-    private EditText name;
-    private EditText begin_summ;
-    private EditText description;
+    private EditText summ;
+    private EditText comment;
 
     //___________________FIELDS
-    private IEditCashAccountFragmentListener listener;
+    private IEditTransactionFragmentListener listener;
     private final View.OnClickListener clickListener = new View.OnClickListener()
     {
         @Override
@@ -41,7 +40,7 @@ public class EditCashAccountFragment
                     listener.cancel();
                     break;
                 case R.id.ok:
-                    saveCashAccount();
+                    saveTransaction();
                     break;
             }
         }
@@ -50,16 +49,15 @@ public class EditCashAccountFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.edit_cash_account_fragment, container, false);
+        View v = inflater.inflate(R.layout.edit_transaction_fragment, container, false);
         initViews(v);
         init();
         return v;
     }
     private void initViews(View v)
     {
-        name = (EditText) v.findViewById(R.id.name);
-        begin_summ = (EditText) v.findViewById(R.id.begin_summ);
-        description = (EditText) v.findViewById(R.id.description);
+        summ = (EditText) v.findViewById(R.id.summ);
+        comment = (EditText) v.findViewById(R.id.comment);
         v.findViewById(R.id.cancel).setOnClickListener(clickListener);
         v.findViewById(R.id.ok).setOnClickListener(clickListener);
     }
@@ -68,18 +66,20 @@ public class EditCashAccountFragment
 
     }
 
-    private void saveCashAccount()
+    private void saveTransaction()
     {
-        CashAccount item = new CashAccount();
-        item.name = name.getText().toString();
-        item.description = description.getText().toString();
-        SQliteApi.getInstanse().getCashAccounts().insertOne(item);
-        listener.saveCashAccount();
+        Transaction item = new Transaction();
+        item.cash_account_from_id = 1;
+        item.time = System.currentTimeMillis();
+        item.summ = Integer.parseInt(summ.getText().toString());
+        item.comment = comment.getText().toString();
+        SQliteApi.getInstanse().getTransactions().insertOne(item);
+        listener.saveTransaction();
     }
 
-    public interface IEditCashAccountFragmentListener
+    public interface IEditTransactionFragmentListener
     {
-        void saveCashAccount();
+        void saveTransaction();
         void cancel();
     }
 }

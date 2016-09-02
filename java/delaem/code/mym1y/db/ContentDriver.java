@@ -28,7 +28,9 @@ public class ContentDriver
             content.put(BaseColumns._ID, item.id);
         }
         content.put(Tables.Transactions.Columns.cash_account_from_id, item.cash_account_from_id);
+        content.put(Tables.Transactions.Columns.time, item.time);
         content.put(Tables.Transactions.Columns.summ, item.summ);
+        content.put(Tables.Transactions.Columns.comment, item.comment);
         return content;
     }
 }
