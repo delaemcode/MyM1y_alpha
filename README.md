@@ -9,8 +9,8 @@ new version MyM1y app for testing
 	minSdkVersion 15
 	targetSdkVersion 24
 	versionBase 1609021807
-	versionCode 1609021840
-	versionName "0.05addents"
+	versionCode 1609021952
+	versionName "0.06ui"
 ## dependencies
 	com.android.support:appcompat-v7:24.1.1
 	com.android.support:recyclerview-v7:24.1.1

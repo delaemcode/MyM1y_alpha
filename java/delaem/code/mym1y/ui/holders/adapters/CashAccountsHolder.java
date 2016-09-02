@@ -23,8 +23,12 @@ public class CashAccountsHolder
     {
         name.setText(n);
     }
-    public void setBalance(int b)
+    public void setBalance(String b)
     {
-        balance.setText(b + "");
+        balance.setText(b);
+    }
+    public void setBalanceTextColor(int c)
+    {
+        balance.setTextColor(c);
     }
 }

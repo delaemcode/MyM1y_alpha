@@ -13,6 +13,7 @@
     <color name="gray">#30302E</color>
     <color name="graydark">#211C1B</color>
     <color name="orange">#FC4512</color>
+    <color name="red">#F44336</color>
     <color name="yellow">#FCC600</color>
     <color name="green">#098C00</color>
 </resources>

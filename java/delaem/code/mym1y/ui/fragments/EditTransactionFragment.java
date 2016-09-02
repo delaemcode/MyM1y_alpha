@@ -1,6 +1,8 @@
 package delaem.code.mym1y.ui.fragments;
 
 import android.database.Cursor;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import delaem.code.mym1y.R;
@@ -29,6 +32,7 @@ public class EditTransactionFragment
     }
 
     //___________________VIEWS
+    private ImageButton side;
     private TextView cash_account;
     private EditText summ;
     private EditText comment;
@@ -52,9 +56,15 @@ public class EditTransactionFragment
                 case R.id.cash_account:
                     chooseCashAccount();
                     break;
+                case R.id.side:
+                    cangeSide();
+                    break;
             }
         }
     };
+    private boolean sidePositive;
+    private Drawable positive;
+    private Drawable negative;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -66,15 +76,25 @@ public class EditTransactionFragment
     }
     private void initViews(View v)
     {
+        side = (ImageButton) v.findViewById(R.id.side);
         summ = (EditText) v.findViewById(R.id.summ);
         comment = (EditText) v.findViewById(R.id.comment);
         cash_account = (TextView) v.findViewById(R.id.cash_account);
         v.findViewById(R.id.cancel).setOnClickListener(clickListener);
         v.findViewById(R.id.ok).setOnClickListener(clickListener);
         cash_account.setOnClickListener(clickListener);
+        side.setOnClickListener(clickListener);
     }
     private void init()
     {
+        sidePositive = true;
+        positive = getActivity().getResources().getDrawable(R.drawable.ic_add_white_24dp);
+        positive.mutate();
+        positive.setColorFilter(getActivity().getResources().getColor(R.color.green), PorterDuff.Mode.SRC_ATOP);
+        negative = getActivity().getResources().getDrawable(R.drawable.ic_remove_white_24dp);
+        negative.mutate();
+        negative.setColorFilter(getActivity().getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+        updateSide();
         transaction = new Transaction();
         Cursor cursor = SQliteApi.getInstanse().getCashAccounts().getAll();
         if(cursor.moveToFirst())
@@ -85,10 +105,31 @@ public class EditTransactionFragment
         cursor.close();
     }
 
+    private void cangeSide()
+    {
+        sidePositive = !sidePositive;
+        updateSide();
+    }
+    private void updateSide()
+    {
+        if(sidePositive)
+        {
+            side.setImageDrawable(positive);
+        }
+        else
+        {
+            side.setImageDrawable(negative);
+        }
+    }
+
     private void saveTransaction()
     {
         transaction.time = System.currentTimeMillis();
         transaction.summ = Integer.parseInt(summ.getText().toString());
+        if(!sidePositive)
+        {
+            transaction.summ *= -1;
+        }
         transaction.comment = comment.getText().toString();
         SQliteApi.getInstanse().getTransactions().insertNew(transaction);
         listener.saveTransaction();
