@@ -1,10 +1,11 @@
-package delaem.code.mym1y.models;
+package delaem.code.mym1y.models.edittransaction;
 
 import android.provider.BaseColumns;
 
 import delaem.code.mym1y.db.Tables;
+import delaem.code.mym1y.models.CursorModel;
 
-public class CashAccountsModel
+public class ChooseCashAccountsModel
         extends CursorModel
 {
     public int getId()
@@ -15,9 +16,5 @@ public class CashAccountsModel
     public String getName()
     {
         return data.getString(data.getColumnIndex(Tables.CashAccounts.Columns.name));
-    }
-    public int getBalance()
-    {
-        return data.getInt(data.getColumnIndex(Tables.CashAccounts.Columns.balance));
     }
 }

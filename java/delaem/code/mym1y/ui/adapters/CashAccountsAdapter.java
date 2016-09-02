@@ -29,6 +29,7 @@ public class CashAccountsAdapter
             }
         });
         holder.setName(data.getName());
+        holder.setBalance(data.getBalance());
     }
 
     @Override

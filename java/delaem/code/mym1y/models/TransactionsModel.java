@@ -1,13 +1,23 @@
 package delaem.code.mym1y.models;
 
+import android.database.Cursor;
+
+import delaem.code.mym1y.db.SQliteApi;
 import delaem.code.mym1y.db.Tables;
 
 public class TransactionsModel
         extends CursorModel
 {
-    public String getCashAccountFrom()
+    public String getNameCashAccountFrom()
     {
-        return data.getString(data.getColumnIndex(Tables.Transactions.Columns.cash_account_from_id));
+        String name = null;
+        Cursor cursor = SQliteApi.getInstanse().getCashAccounts().getOneFromId(data.getInt(data.getColumnIndex(Tables.Transactions.Columns.cash_account_from_id)));
+        if(cursor.moveToFirst())
+        {
+            name = cursor.getString(cursor.getColumnIndex(Tables.CashAccounts.Columns.name));
+        }
+        cursor.close();
+        return name;
     }
     public String getTime()
     {

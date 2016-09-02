@@ -56,7 +56,6 @@ public class MainActivity
     }
     private void init()
     {
-        testData();
         tab_selector.setListener(new TabSelector.TabSelectorListener()
         {
             @Override
@@ -81,32 +80,5 @@ public class MainActivity
                 .beginTransaction()
                 .add(R.id.main_frame, cashAccountsListFragment)
                 .commit();
-    }
-
-    private void testData()
-    {
-//        insertCashAccounts();
-//        insertTransactions();
-    }
-    private void insertCashAccounts()
-    {
-        CashAccount item = new CashAccount();
-        item.name = "nalychko";
-        SQliteApi.getInstanse().getCashAccounts().insertOne(item);
-        item.name = "sber";
-        SQliteApi.getInstanse().getCashAccounts().insertOne(item);
-    }
-    private void insertTransactions()
-    {
-        Transaction item = new Transaction();
-        item.cash_account_from_id = 0;
-        item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().getTransactions().insertOne(item);
-        item.cash_account_from_id = 0;
-        item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().getTransactions().insertOne(item);
-        item.cash_account_from_id = 1;
-        item.time = System.currentTimeMillis();
-        SQliteApi.getInstanse().getTransactions().insertOne(item);
     }
 }

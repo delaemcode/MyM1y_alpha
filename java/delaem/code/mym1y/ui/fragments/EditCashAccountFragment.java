@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.core.CashAccount;
+import delaem.code.mym1y.core.Transaction;
 import delaem.code.mym1y.db.SQliteApi;
 
 public class EditCashAccountFragment
@@ -71,9 +72,18 @@ public class EditCashAccountFragment
     private void saveCashAccount()
     {
         CashAccount item = new CashAccount();
+        double did = System.currentTimeMillis();
+        did /= 10_000_000;
+        item.id = (int)((did - (int)did) * 10_000_000);
         item.name = name.getText().toString();
         item.description = description.getText().toString();
         SQliteApi.getInstanse().getCashAccounts().insertOne(item);
+        Transaction transaction = new Transaction();
+        transaction.cash_account_from_id = item.id;
+        transaction.summ = Integer.parseInt(begin_summ.getText().toString());
+        transaction.time = System.currentTimeMillis();
+        transaction.comment = "Start balance";
+        SQliteApi.getInstanse().getTransactions().insertNew(transaction);
         listener.saveCashAccount();
     }
 

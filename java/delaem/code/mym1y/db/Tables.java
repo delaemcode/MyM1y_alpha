@@ -25,7 +25,9 @@ public class Tables
         }
 
         Cursor getAll();
+        Cursor getOneFromId(int id);
         long insertOne(CashAccount item);
+        long updateBalance(int id, int balance);
     }
     public interface Transactions
     {
@@ -46,6 +48,7 @@ public class Tables
         }
 
         Cursor getAll();
-        long insertOne(Transaction item);
+        Cursor getAllFromCashAccountId(int cash_account_from_id);
+        long insertNew(Transaction item);
     }
 }

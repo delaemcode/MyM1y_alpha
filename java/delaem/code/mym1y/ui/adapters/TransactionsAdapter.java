@@ -18,7 +18,7 @@ public class TransactionsAdapter
     @Override
     protected void setData(TransactionsHolder holder, TransactionsModel data)
     {
-        holder.setCashAccountFrom(data.getCashAccountFrom());
+        holder.setNameCashAccountFrom(data.getNameCashAccountFrom());
         holder.setTime(data.getTime());
         holder.setComment(data.getComment());
         holder.setSumm(data.getSumm());

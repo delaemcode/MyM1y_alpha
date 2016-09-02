@@ -9,7 +9,7 @@ import delaem.code.mym1y.R;
 public class TransactionsHolder
         extends ModelHolder
 {
-    private TextView cash_account_from;
+    private TextView name_cash_account_from;
     private TextView time;
     private TextView summ;
     private TextView comment;
@@ -17,15 +17,15 @@ public class TransactionsHolder
     public TransactionsHolder(Context context, ViewGroup parent)
     {
         super(context, parent, R.layout.transaction_list_item);
-        cash_account_from = (TextView) itemView.findViewById(R.id.cash_account_from);
+        name_cash_account_from = (TextView) itemView.findViewById(R.id.name_cash_account_from);
         time = (TextView) itemView.findViewById(R.id.time);
         summ = (TextView) itemView.findViewById(R.id.summ);
         comment = (TextView) itemView.findViewById(R.id.comment);
     }
 
-    public void setCashAccountFrom(String text)
+    public void setNameCashAccountFrom(String text)
     {
-        cash_account_from.setText(text);
+        name_cash_account_from.setText(text);
     }
     public void setTime(String text)
     {

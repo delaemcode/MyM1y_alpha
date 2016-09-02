@@ -24,10 +24,16 @@ public abstract class CursorModel
     @Override
     public void swapData(Cursor d)
     {
+        clearData();
+        super.swapData(d);
+    }
+
+    @Override
+    public void clearData()
+    {
         if(data != null)
         {
             data.close();
         }
-        super.swapData(d);
     }
 }

@@ -10,6 +10,6 @@ public abstract class Model<DATA>
     }
 
     public abstract void readyItem(int i);
-
     public abstract int getItemCount();
+    public abstract void clearData();
 }
