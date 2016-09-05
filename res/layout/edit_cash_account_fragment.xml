@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/choose_cash_account_type"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <ImageView
+            android:background="@drawable/accent_ripple_selector"
+            android:id="@+id/ico"
+            android:scaleType="center"
+            android:layout_marginRight="2dp"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:background="@drawable/accent_ripple_selector"
+            android:id="@+id/cash_account_type"
+            android:gravity="center_vertical"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:padding="6dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
     <TextView
         android:padding="6dp"
         android:gravity="center_vertical"

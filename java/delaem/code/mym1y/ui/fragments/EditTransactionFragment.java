@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import delaem.code.mym1y.R;
 import delaem.code.mym1y.core.Transaction;
 import delaem.code.mym1y.db.SQliteApi;
 import delaem.code.mym1y.db.Tables;
+import delaem.code.mym1y.helpers.CashAccountHelper;
 import delaem.code.mym1y.ui.fragments.dialogs.ChooseCashAccount;
 
 public class EditTransactionFragment
@@ -32,6 +34,7 @@ public class EditTransactionFragment
     }
 
     //___________________VIEWS
+    private ImageView ico;
     private ImageButton side;
     private TextView cash_account;
     private EditText summ;
@@ -53,7 +56,7 @@ public class EditTransactionFragment
                 case R.id.ok:
                     saveTransaction();
                     break;
-                case R.id.cash_account:
+                case R.id.choose_cash_account:
                     chooseCashAccount();
                     break;
                 case R.id.side:
@@ -76,18 +79,19 @@ public class EditTransactionFragment
     }
     private void initViews(View v)
     {
+        ico = (ImageView) v.findViewById(R.id.ico);
         side = (ImageButton) v.findViewById(R.id.side);
         summ = (EditText) v.findViewById(R.id.summ);
         comment = (EditText) v.findViewById(R.id.comment);
         cash_account = (TextView) v.findViewById(R.id.cash_account);
         v.findViewById(R.id.cancel).setOnClickListener(clickListener);
         v.findViewById(R.id.ok).setOnClickListener(clickListener);
-        cash_account.setOnClickListener(clickListener);
-        side.setOnClickListener(clickListener);
+        v.findViewById(R.id.choose_cash_account).setOnClickListener(clickListener);
     }
     private void init()
     {
         sidePositive = true;
+        side.setOnClickListener(clickListener);
         positive = getActivity().getResources().getDrawable(R.drawable.ic_add_white_24dp);
         positive.mutate();
         positive.setColorFilter(getActivity().getResources().getColor(R.color.green), PorterDuff.Mode.SRC_ATOP);
@@ -101,6 +105,7 @@ public class EditTransactionFragment
         {
             transaction.cash_account_from_id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
             cash_account.setText(cursor.getString(cursor.getColumnIndex(Tables.CashAccounts.Columns.name)));
+            ico.setImageDrawable(CashAccountHelper.getCashAccountIco(cursor.getInt(cursor.getColumnIndex(Tables.CashAccounts.Columns.ico))));
         }
         cursor.close();
     }
@@ -124,8 +129,18 @@ public class EditTransactionFragment
 
     private void saveTransaction()
     {
-        transaction.time = System.currentTimeMillis();
+        if(summ.getText().toString().length() == 0)
+        {
+            errorNeedSum();
+            return;
+        }
         transaction.summ = Integer.parseInt(summ.getText().toString());
+        if(transaction.summ == 0)
+        {
+            errorNeedSum();
+            return;
+        }
+        transaction.time = System.currentTimeMillis();
         if(!sidePositive)
         {
             transaction.summ *= -1;
@@ -133,6 +148,10 @@ public class EditTransactionFragment
         transaction.comment = comment.getText().toString();
         SQliteApi.getInstanse().getTransactions().insertNew(transaction);
         listener.saveTransaction();
+    }
+    private void errorNeedSum()
+    {
+
     }
 
     private void chooseCashAccount()
@@ -154,6 +173,7 @@ public class EditTransactionFragment
         {
             transaction.cash_account_from_id = id;
             cash_account.setText(cursor.getString(cursor.getColumnIndex(Tables.CashAccounts.Columns.name)));
+            ico.setImageDrawable(CashAccountHelper.getCashAccountIco(cursor.getInt(cursor.getColumnIndex(Tables.CashAccounts.Columns.ico))));
         }
         cursor.close();
     }

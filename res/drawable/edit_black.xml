@@ -7,6 +7,7 @@
             <stroke
                 android:color="@color/black"
                 android:width="2px"/>
+            <solid android:color="@android:color/transparent" />
         </shape>
     </item>
 </selector>

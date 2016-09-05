@@ -30,6 +30,7 @@ public class ChooseCashAccountsAdapter
             }
         });
         holder.setName(data.getName());
+        holder.setIco(data.getIco());
     }
 
     @Override

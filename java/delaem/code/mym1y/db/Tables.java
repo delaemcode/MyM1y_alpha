@@ -15,6 +15,8 @@ public class Tables
                 BaseColumns._ID + " integer primary key autoincrement, " +
                 Columns.description + " text" + "," +
                 Columns.balance + " text" + "," +
+                Columns.type + " integer" + "," +
+                Columns.ico + " integer" + "," +
                 Columns.name + " text" +
                 ");";
         class Columns
@@ -22,6 +24,8 @@ public class Tables
             public static final String name = TABLE_NAME + "_" + "name";
             public static final String description = TABLE_NAME + "_" + "description";
             public static final String balance = TABLE_NAME + "_" + "balance";
+            public static final String type = TABLE_NAME + "_" + "type";
+            public static final String ico = TABLE_NAME + "_" + "ico";
         }
 
         Cursor getAll();

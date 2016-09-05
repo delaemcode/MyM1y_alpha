@@ -17,4 +17,8 @@ public class ChooseCashAccountsModel
     {
         return data.getString(data.getColumnIndex(Tables.CashAccounts.Columns.name));
     }
+    public int getIco()
+    {
+        return data.getInt(data.getColumnIndex(Tables.CashAccounts.Columns.ico));
+    }
 }

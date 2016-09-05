@@ -20,4 +20,8 @@ public class CashAccountsModel
     {
         return data.getInt(data.getColumnIndex(Tables.CashAccounts.Columns.balance));
     }
+    public int getIco()
+    {
+        return data.getInt(data.getColumnIndex(Tables.CashAccounts.Columns.ico));
+    }
 }

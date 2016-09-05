@@ -53,6 +53,7 @@ public class CashAccountsAdapter
             holder.setBalance("" + 0);
             holder.setBalanceTextColor(balanceNeutralColor);
         }
+        holder.setIco(data.getIco());
     }
 
     @Override

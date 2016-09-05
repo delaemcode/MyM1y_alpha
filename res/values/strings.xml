@@ -5,4 +5,10 @@
     <string name="summ">Summ</string>
     <string name="start_balance">Start balance</string>
     <string name="name">Name</string>
+    <string name="cash_account_type_cash">Cash</string>
+    <string name="cash_account_type_debit">Debit</string>
+    <string name="cash_account_type_credit">Credit</string>
+    <string name="cash_account_type_phone">Phone</string>
+    <string name="cash_account_type_card">Card</string>
+    <string name="cash_account_type_account">Account</string>
 </resources>

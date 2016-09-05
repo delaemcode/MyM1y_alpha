@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:clickable="true"
+              android:background="@drawable/accent_ripple_selector"
+              android:gravity="center_horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ico"
+        android:scaleType="center"
+        android:layout_width="64dp"
+        android:layout_height="64dp"/>
+    <View
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+</LinearLayout>

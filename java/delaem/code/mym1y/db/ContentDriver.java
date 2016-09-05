@@ -18,6 +18,8 @@ public class ContentDriver
         content.put(Tables.CashAccounts.Columns.name, item.name);
         content.put(Tables.CashAccounts.Columns.description, item.description);
         content.put(Tables.CashAccounts.Columns.balance, item.balance + "");
+        content.put(Tables.CashAccounts.Columns.type, item.type);
+        content.put(Tables.CashAccounts.Columns.ico, item.ico);
         return content;
     }
     static public ContentValues getContentValues(Transaction item)

@@ -3,11 +3,27 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/cash_account"
-        android:padding="12dp"
+    <LinearLayout
+        android:id="@+id/choose_cash_account"
+        android:background="@drawable/accent_ripple_selector"
+        android:padding="2dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="56dp">
+        <ImageView
+            android:id="@+id/ico"
+            android:scaleType="center"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/cash_account"
+            android:gravity="center_vertical"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:padding="6dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
     <TextView
         android:padding="6dp"
         android:gravity="center_vertical"
